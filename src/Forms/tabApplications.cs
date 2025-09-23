@@ -47,7 +47,41 @@ internal class tabApplications : UserControl, ITaskManagerTab {
         InitializeComponent();
         InitializeExtras();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Método para traducir todos los textos de controles al español
+    private void ApplyLocalization()
+    {
+        // Columnas
+        colPID.Text = "ID de Proceso";
+        colTask.Text = "Tarea";
+        colHandle.Text = "Identificador";
+        colStatus.Text = "Estado";
+
+        // Botones
+        btnEndTask.Text = "Finalizar tarea";
+        btnKillTask.Text = "Terminar";
+        btnSwitchTo.Text = "Cambiar a";
+        btnGoToProcess.Text = "Ir al proceso";
+        btnNewTask.Text = "Nueva tarea...";
+
+        // Menú contextual
+        cmsSwitchTo.Text = "Cambiar a";
+        cmsToFront.Text = "Traer al frente";
+        cmsMinimize.Text = "Minimizar";
+        cmsMaximize.Text = "Maximizar";
+        cmsCascade.Text = "Cascada";
+        cmsTileVertical.Text = "Mosaico vertical";
+        cmsTileHorizontal.Text = "Mosaico horizontal";
+        cmsEndTask.Text = "Finalizar tarea";
+        cmsKillTask.Text = "Terminar proceso";
+        cmsGoToProcess.Text = "Ir al proceso";
+
+        Title = "Aplicaciones";
+    }
+
     private void InitializeComponent() {
         components = new Container();
         lv = new sMkListView();

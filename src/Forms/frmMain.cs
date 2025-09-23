@@ -6,9 +6,25 @@ using sMkTaskManager.Classes;
 using sMkTaskManager.Forms;
 namespace sMkTaskManager;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    Este formulario (frmMain) actúa como el núcleo de un administrador de tareas personalizado. 
+    Gestiona pestañas de monitoreo, timers de actualización, modos de visualización (normal o pantalla completa), 
+    y un icono dinámico en la bandeja del sistema que muestra información en tiempo real. Además, 
+    implementa un sistema de guardado de configuraciones para restaurar el estado de la aplicación entre ejecuciones.
+*/
+
+
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 public partial class frmMain : Form {
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    El formulario declara campos privados que controlan los timers, mediciones de tiempo, trabajos en segundo plano y tareas en paralelo.
+    Estos objetos permiten refrescar la información sin bloquear la interfaz gráfica.
+*/
     private readonly List<Task> _MonitorTasks = new();
     private readonly System.Timers.Timer _StatusTimer = new() { Enabled = false, Interval = 10000 };
     private readonly System.Timers.Timer _MonitorTriggerTimer = new() { Enabled = false };
@@ -18,6 +34,12 @@ public partial class frmMain : Form {
     private Size? _prevSize, _prevMinSize, _fullScreenSize;
     private Point? _prevLocation, _fullScreenLocation;
 
+ // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+ /*
+    En el constructor se inicializan los componentes gráficos, 
+    se configuran menús, pestañas y se preparan los recursos visuales que usará la aplicación.
+ */
     public frmMain() {
         InitializeComponent();
         InitializeMainMenu();
@@ -25,21 +47,45 @@ public partial class frmMain : Form {
         Tabs.Tab.Add("Sys", new tabSystem());
         Tabs.Tab.Add("Apps", new tabApplications());
         Tabs.Tab.Add("Procs", new tabProcesses());
-        Tabs.Tab.Add("Servs", new tabServices());
+        //Tabs.Tab.Add("Servs", new tabServices());
         Tabs.Tab.Add("Perfs", new tabPerformance());
         Tabs.Tab.Add("GPUs", new tabGpu());
-        Tabs.Tab.Add("Net", new tabNetworking());
-        Tabs.Tab.Add("Conns", new tabConnections());
-        Tabs.Tab.Add("Ports", new tabPorts());
-        Tabs.Tab.Add("Devices", new tabDevices());
+        //Tabs.Tab.Add("Net", new tabNetworking());
+        //Tabs.Tab.Add("Conns", new tabConnections());
+        //Tabs.Tab.Add("Ports", new tabPorts());
+        //Tabs.Tab.Add("Devices", new tabDevices());
         Tabs.Tab.Add("Users", new tabUsers());
         // Flicker Free Controls by DoubleBuffer
         Extensions.CascadingDoubleBuffer(this);
         Shared.ilProcesses.Images.Add(Resources.Resources.Process_Empty);
         Shared.ilProcesses.Images.Add(Resources.Resources.Process_Info);
-        // Extensions.UseImmersiveDarkMode(Handle, true);
-        // Extensions.UseImmersiveRoundCorner(Handle, 3);
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+    protected override void OnHandleCreated(EventArgs e)
+    {
+        base.OnHandleCreated(e);
+
+        // Activa dark mode en barra de título
+        Extensions.UseImmersiveDarkMode(this.Handle, true);
+
+        // Activa esquinas redondeadas
+        Extensions.UseImmersiveRoundCorner(this.Handle, 2);
+    }
+
+
+
+
+
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+    /*
+        El formulario redefine WndProc para manejar mensajes especiales, 
+        como minimizar, cerrar, o activar la ventana desde otra instancia.
+    */
+
     protected override void WndProc(ref Message m) {
         if (m.Msg == 0x112) { // WM_SYSCOMMAND
             if (m.WParam == 61536) { Shared.RealExit = false; }
@@ -51,6 +97,12 @@ public partial class frmMain : Form {
         }
         base.WndProc(ref m);
     }
+
+ // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+ /*
+        Cuando el formulario termina de cargarse, aplica configuraciones guardadas, 
+        construye pestañas dinámicamente y arranca la inicialización en segundo plano.
+ */
 
     private void OnLoad(object sender, EventArgs e) {
         Extensions.StartMeasure(_StopWatch1);
@@ -164,6 +216,12 @@ public partial class frmMain : Form {
             Visible = true;
         }
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    /*
+       El formulario responde a combinaciones de teclas y clics del ratón para facilitar la interacción.    
+    */
+
     private void OnKeyDownEventHandler(object sender, KeyEventArgs e) {
         if (e.Handled) return;
         if (e.KeyCode == Keys.Escape && !(e.Alt || e.Control || e.Shift)) {
@@ -179,6 +237,15 @@ public partial class frmMain : Form {
             Feature_Preferences(2);
         }
     }
+
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    /*
+           Antes de cerrarse, el formulario puede minimizarse a la bandeja en lugar de terminar.
+           También guarda configuraciones como tamaño, posición o pestaña activa.
+    */
+
+
     private void OnClosingEventHandler(object sender, FormClosingEventArgs e) {
         if (e.CloseReason == CloseReason.UserClosing && !Shared.RealExit) {
             if (mnuOptions_MinimizeClose.Checked & !Shared.RealExit) {
@@ -248,6 +315,12 @@ public partial class frmMain : Form {
         Shared.CpuLoad = (int)((tabPerformance)sender).System.CpuUsage.Value;
         ssCpuLoad.Text = "CPU Load: " + Shared.CpuLoad + "%";
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    /*
+           Se permite mostrar únicamente la pestaña de rendimiento ocupando toda la ventana.
+           El formulario recuerda el tamaño y posición anteriores para restaurarlos después.
+    */
 
     internal bool FullScreen {
         get { return Settings.inFullScreen; }
@@ -320,6 +393,13 @@ public partial class frmMain : Form {
             if (MonitorRunning) MonitorUpdateBtnStatus();
         }
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    /*
+           El formulario implementa métodos para arrancar, detener o alternar el monitoreo.
+           El refresco puede hacerse de forma síncrona o asincrónica en paralelo para no congelar la interfaz.
+    */
+
     internal void MonitorStart(bool firstTime = false) {
         if (MonitorRunning) return;
         if (firstTime) _MonitorTriggerTimer.Interval = 50;
@@ -381,6 +461,12 @@ public partial class frmMain : Form {
             ssBtnState.Image = Resources.Resources.State_Stop;
         }
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    /*
+           El programa dibuja dinámicamente un icono con barras verdes que representan el uso de CPU, y lo coloca en la bandeja.
+    */
+
     private void TrayUpdaterExecutor(object? sender, ElapsedEventArgs e) {
         if (!Settings.ShowCPUOnTray) { _TrayUpdateTimer.Stop(); niTray.Icon = Icon; return; }
         // Draw a graph with the value of Shared.CpuLoad

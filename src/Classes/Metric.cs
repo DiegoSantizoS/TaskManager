@@ -7,6 +7,34 @@ using System.Xml.Linq;
 
 namespace sMkTaskManager.Classes;
 
+
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+     La clase Metric y sus variantes (MetricNew, MetricNewString) están diseñadas como 
+     estructuras para representar métricas dinámicas del sistema, como valores numéricos 
+     o de texto, que pueden variar en tiempo real.  
+
+     Su función principal es almacenar un valor actual (Value), calcular la diferencia 
+     respecto a su estado anterior (Delta) y notificar cualquier cambio mediante eventos 
+     especializados (AnyChanged, ValueChanged, DeltaChanged).  
+
+     Estas clases permiten formatear los valores en distintas unidades (numérico, Kb, Mb, Gb), 
+     adaptándolos a la visualización que necesite la aplicación. También integran soporte 
+     genérico con interfaces (IMetric<T>, IMetricListener), lo que facilita trabajar con 
+     distintos tipos de datos (numéricos o cadenas) bajo un mismo modelo de programación.  
+
+     El diseño asegura que cada actualización de una métrica sea registrada, comparada con 
+     el valor anterior y comunicada mediante eventos, lo que proporciona un mecanismo robusto 
+     de monitoreo y sincronización para su uso en módulos como CPU, memoria, red o procesos.  
+
+     En conclusión, este código constituye la base para un sistema flexible y extensible 
+     de gestión de métricas, con soporte para eventos, formateo y genéricos, optimizado 
+     para la representación y seguimiento de datos dinámicos.
+*/
+
+
+
 internal class Metric {
     private Int128 _Value, _Delta;
     private bool _isFirst = true;

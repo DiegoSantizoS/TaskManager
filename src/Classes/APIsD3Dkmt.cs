@@ -3,6 +3,21 @@ using System.Runtime.InteropServices;
 namespace sMkTaskManager.Classes;
 
 [SupportedOSPlatform("windows")]
+
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    Esta clase API representa un módulo avanzado de interoperabilidad entre C# y la 
+    WinAPI gráfica de Windows, orientado al diagnóstico y monitoreo de adaptadores de video. Gracias a 
+    la definición de métodos de extensión, enumeraciones, estructuras y funciones importadas, permite 
+    consultar información crítica de las GPU como uso y segmentación de memoria, estadísticas de nodos, 
+    características del controlador y parámetros de rendimiento. En términos prácticos, constituye el 
+    componente técnico que posibilita que un administrador de tareas escrito en .NET acceda a datos 
+    detallados de las tarjetas gráficas y sus controladores, ejecutando operaciones de bajo nivel que 
+    normalmente están reservadas al sistema nativo de Windows.
+*/
+
+
 internal unsafe static partial class API {
 
     public static bool IsBitSet(this uint data, int pos) {

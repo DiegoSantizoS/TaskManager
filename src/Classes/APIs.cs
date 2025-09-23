@@ -4,6 +4,20 @@ using static sMkTaskManager.Classes.API;
 
 namespace sMkTaskManager.Classes;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase API actúa como un wrapper P/Invoke en C#, 
+    diseñado específicamente para exponer al entorno administrado de .NET una amplia gama de estructuras, 
+    enumeraciones y funciones nativas de Windows. Gracias a esta capa de interoperabilidad, 
+    el administrador de tareas implementado en C# logra comunicarse directamente con el 
+    sistema operativo a través de la WinAPI.Esto le permite acceder y manipular información de bajo nivel 
+    relacionada con procesos en ejecución, consumo y gestión de memoria, control de servicios del sistema, 
+    operaciones de red, interacción con ventanas y sesiones de usuario, entre otros aspectos fundamentales. 
+    En términos prácticos,esta clase constituye el puente técnico que posibilita que una aplicación de alto 
+    nivel en .NET pueda ejecutar operaciones críticas y detalladas propias del entorno nativo de Windows.
+*/
+
 internal unsafe static partial class API {
 
     #region "API Enums..."

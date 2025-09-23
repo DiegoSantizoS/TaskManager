@@ -41,7 +41,58 @@ internal class tabProcesses : UserControl, ITaskManagerTab {
         lv!.ContentType = typeof(TaskManagerProcess);
         lv!.DataSource = Processes.DataExporter;
         lv!.SpaceFirstValue = Settings.IconsInProcess;
+        ApplyLocalization();
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña Procesos
+    private void ApplyLocalization()
+    {
+        // Columnas
+        lvc_PID.Text = "PID";
+        lvc_Name.Text = "Nombre";
+
+        // Botones
+        btnDetails.Text = "Detalles";
+        btnProperties.Text = "Propiedades";
+        btnProperties.Width = 100;
+        btnProperties.TextAlign = ContentAlignment.MiddleLeft;
+        btnKill.Text = "Finalizar proceso";
+        btnForceRefresh.Text = "Forzar actualización";
+        btnAllUsers.Text = "Mostrar todos los usuarios";
+
+        // Label inferior
+        lblText.Text = "Total: 0, Seleccionados: 0";
+
+        // Menú contextual
+        cms.Items["Details"].Text = "Más detalles";
+        cms.Items["Properties"].Text = "Propiedades del archivo";
+        cms.Items["Location"].Text = "Abrir ubicación";
+        cms.Items["Parent"].Text = "Encontrar proceso padre";
+        cms.Items["Kill"].Text = "Finalizar proceso";
+        cms.Items["Pause"].Text = "Congelar proceso";
+        cms.Items["Resume"].Text = "Reanudar proceso";
+        cms.Items["Debug"].Text = "Depurar proceso";
+        cms.Items["Dump"].Text = "Crear volcado (Dump)";
+        cms.Items["Priority"].Text = "Establecer prioridad";
+        cms.Items["Affinity"].Text = "Establecer afinidad...";
+        cms.Items["Online"].Text = "Buscar en línea";
+        cms.Items["Files"].Text = "Mostrar archivos bloqueados";
+
+        // Submenú prioridad
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority1"].Text = "Tiempo real";
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority2"].Text = "Alta";
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority3"].Text = "Superior a lo normal";
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority4"].Text = "Normal";
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority5"].Text = "Inferior a lo normal";
+        ((ToolStripMenuItem)cms.Items["Priority"]).DropDownItems["Priority6"].Text = "Baja";
+
+        // También título y descripción de la pestaña
+        Title = "Procesos";
+        Description = "Lista de procesos en ejecución";
+    }
+
+
     private void InitializeComponent() {
         components = new Container();
         lv = new sMkListView();

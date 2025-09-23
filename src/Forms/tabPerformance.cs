@@ -105,7 +105,80 @@ internal partial class tabPerformance : UserControl, ITaskManagerTab {
         InitializeComponent();
         InitializeSettings();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña Rendimiento
+    private void ApplyLocalization()
+    {
+        // ----- Labels de los gráficos -----
+        lblCpuMeter.Text = "Uso CPU";
+        lblCpuChart.Text = "Historial de uso de CPU";
+
+        lblMemMeter.Text = "Uso Memoria";
+        lblMemChart.Text = "Historial de uso de Memoria";
+
+        lblIOMeter.Text = "Uso E/S";
+        lblIOChart.Text = "Historial de transferencias E/S";
+
+        lblDiskMeter.Text = "Uso Disco";
+        lblDiskChart.Text = "Historial de transferencias de Disco";
+
+        lblNetMeter.Text = "Uso Red";
+        lblNetChart.Text = "Historial de transferencias de Red";
+
+        // ----- GroupBox: Memoria física -----
+        gbMemory.Text = "Memoria Física";
+        gbMemory_Label1.Text = "Total:";
+        gbMemory_Label2.Text = "Disponible:";
+        gbMemory_Label3.Text = "En caché:";
+
+        // ----- GroupBox: Operaciones de E/S -----
+        gbIOops.Text = "Operaciones E/S (Δ)";
+        gbIOops_Label1.Text = "Lecturas:";
+        gbIOops_Label2.Text = "Escrituras:";
+        gbIOops_Label3.Text = "Otras:";
+
+        // ----- GroupBox: Transferencias de E/S -----
+        gbIOtranf.Text = "Transferencias E/S (Δ)";
+        gbIOtranf_Label1.Text = "Lecturas:";
+        gbIOtranf_Label2.Text = "Escrituras:";
+        gbIOtranf_Label3.Text = "Otras:";
+
+        // ----- GroupBox: Carga de Commit -----
+        gbCommit.Text = "Carga de Commit";
+        gbCommit_Label1.Text = "Límite:";
+        gbCommit_Label2.Text = "Actual:";
+        gbCommit_Label3.Text = "Máximo:";
+
+        // ----- GroupBox: Pagefile -----
+        gbPagefile.Text = "Uso de Pagefile";
+        gbPagefile_Label1.Text = "Límite:";
+        gbPagefile_Label2.Text = "Actual:";
+        gbPagefile_Label3.Text = "Máximo:";
+
+        // ----- GroupBox: Memoria Kernel -----
+        gbKernel.Text = "Memoria del Kernel";
+        gbKernel_Label1.Text = "Total:";
+        gbKernel_Label2.Text = "Paginada:";
+        gbKernel_Label3.Text = "No paginada:";
+
+        // ----- GroupBox: Totales del sistema -----
+        gbSystem.Text = "Totales del Sistema";
+        gbSystem_Label1.Text = "Identificadores:";
+        gbSystem_Label2.Text = "Hilos:";
+        gbSystem_Label3.Text = "Procesos:";
+        gbSystem_Label4.Text = "Servicios:";
+        gbSystem_Label5.Text = "Dispositivos:";
+        gbSystem_Label6.Text = "Tiempo activo:";
+
+        // ----- Título y descripción de la pestaña -----
+        Title = "Rendimiento";
+        Description = "Rendimiento del sistema";
+    }
+
+
     private void InitializeComponent() {
         components = new Container();
         tlpMain = new TableLayoutPanel();
@@ -1489,6 +1562,11 @@ internal partial class tabPerformance : UserControl, ITaskManagerTab {
         meterDisk.LightColors = chartCpu.LightColors;
         meterNet.LightColors = chartCpu.LightColors;
 
+        chartCpu.GridSpacing = 100;
+        chartMem.GridSpacing = 100;
+        chartIO.GridSpacing = 100;
+        chartDisk.GridSpacing = 100;
+        chartNet.GridSpacing = 100;
     }
 
 }

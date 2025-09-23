@@ -4,6 +4,25 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 namespace sMkTaskManager.Classes;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase Handles constituye un módulo de interoperabilidad en C# orientado a la gestión y análisis 
+    de los manejadores (handles) que los procesos mantienen abiertos en el sistema operativo Windows. 
+    Mediante el uso de llamadas nativas a librerías como ntdll.dll y kernel32.dll, esta clase permite 
+    identificar, duplicar y consultar información de objetos internos del sistema, tales como archivos, 
+    claves de registro o recursos asociados a un proceso en ejecución.  
+
+    Gracias a la definición de estructuras, enumeraciones y funciones externas, el administrador de 
+    tareas puede obtener listados detallados de archivos bloqueados por procesos, traducir rutas de 
+    dispositivo a rutas estándar del sistema y mapear claves de registro internas a convenciones de 
+    uso común. En términos prácticos, este componente representa una pieza crítica que posibilita a 
+    una aplicación .NET inspeccionar, interpretar y presentar información de bajo nivel sobre los 
+    recursos que cada proceso utiliza, otorgándole capacidades de diagnóstico avanzadas propias de 
+    herramientas administrativas nativas de Windows.
+*/
+
+
 [SupportedOSPlatform("windows")]
 internal unsafe static partial class Handles {
     const int MAX_PATH = 260;

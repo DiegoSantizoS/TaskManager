@@ -26,7 +26,11 @@ public class sMkPerfChartOld : UserControl {
     private readonly List<double> _Values = new(MAX_VALUE_COUNT);
     private readonly List<double> _ValuesSecond = new(MAX_VALUE_COUNT);
 
+    private bool _isHovered = false;
+    private readonly Font _LegendStringFontBold = new(DefaultFont.FontFamily, 7, FontStyle.Bold);
+
     public sMkPerfChartOld() {
+
         InitializeComponents();
 
         // Set Optimized Double Buffer to reduce flickering
@@ -47,6 +51,7 @@ public class sMkPerfChartOld : UserControl {
     }
 
     private void InitializeComponents() {
+           
         mnuStyle.SuspendLayout();
         mnuGrid.SuspendLayout();
         SuspendLayout();
@@ -110,33 +115,48 @@ public class sMkPerfChartOld : UserControl {
         Relative,
         Strict
     }
+    // General chart state & values
     public double LastValue { get; private set; } = 0;
     public double LastSecondValue { get; private set; } = 0;
     public bool UseTwoValues { get; set; } = false;
-    public double MaxValue {
+
+    // Scale & max display value
+    public double MaxValue
+    {
         get { return _MaxStrictValue; }
         set { _MaxStrictValue = (value * 1.1); }
     }
+
+    // Legend & label customization
     public string ValuesSuffix { get; set; } = "";
     public int LegendSpacing { get; set; } = 35;
     public bool DisplayAverage { get; set; } = false;
     public bool DisplayIndexes { get; set; } = false;
-    public bool DisplayLegends { get; set; } = false;
-    public bool DetailsOnHover { get; set; } = false;
-    public bool BackSolid { get; set; } = false;
-    public Color BackColorShade { get; set; } = Color.Black;
+    public bool DisplayLegends { get; set; } = true;
+    public bool DetailsOnHover { get; set; } = true;
+
+    // Background appearance
+    public bool BackSolid { get; set; } = true;
+    public Color BackColorShade { get; set; } = Color.FromArgb(20, 30, 50);  // dark blue background
     public bool ShadeBackground { get; set; } = true;
+
+    // Scaling and grid
     public ScaleModes ScaleMode { get; set; } = ScaleModes.Absolute;
     public int ValueSpacing { get; set; } = 2;
     public bool AntiAliasing { get; set; } = true;
     public int GridSpacing { get; set; } = 10;
-    public Pen PenGraph { get; set; } = new Pen(Color.Lime, 1);
-    public Pen PenSecondGraph { get; set; } = new Pen(Color.Red, 1);
-    public Pen PenAverage { get; set; } = new Pen(Color.Orange, 1);
-    public Pen PenLegend { get; set; } = new Pen(Color.Yellow, 1);
-    public Pen PenGridVertical { get; set; } = new Pen(Color.Green, 1);
-    public Pen PenGridHorizontal { get; set; } = new Pen(Color.Green, 1);
+
+    // Pens (colors and thicknesses) — unified with blue theme
+    public Pen PenGraph { get; set; } = new Pen(Color.FromArgb(102, 178, 255), 1);        // Light Blue
+    public Pen PenSecondGraph { get; set; } = new Pen(Color.FromArgb(51, 153, 255), 1);   // Medium Blue
+    public Pen PenAverage { get; set; } = new Pen(Color.FromArgb(0, 102, 204), 1);        // Dark Blue
+    public Pen PenLegend { get; set; } = new Pen(Color.FromArgb(153, 204, 255), 1);       // Very Light Blue
+    public Pen PenGridVertical { get; set; } = new Pen(Color.FromArgb(80, 100, 150), 1);  // Muted Blue-Gray
+    public Pen PenGridHorizontal { get; set; } = new Pen(Color.FromArgb(80, 100, 150), 1);
+
+    // Border style
     public new Border3DStyle BorderStyle { get; set; } = Border3DStyle.Sunken;
+
     public bool LightColors {
         get { return !(BackColor == Color.Black); }
         set {

@@ -1,13 +1,16 @@
-﻿using System.Diagnostics;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
 using sMkTaskManager.Controls;
-using System.Drawing.Drawing2D;
 namespace sMkTaskManager.Forms;
 
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
-internal class tabGpu : UserControl, ITaskManagerTab {
+internal class tabGpu : UserControl, ITaskManagerTab
+{
     private readonly Stopwatch _stopWatch = new();
     private readonly TaskManagerGPUCollection GPUs = new();
     private HashSet<string> ColsGpus = new();
@@ -36,17 +39,49 @@ internal class tabGpu : UserControl, ITaskManagerTab {
     public event EventHandler? ForceRefreshClicked;
 
     private IContainer? components = null;
-    protected override void Dispose(bool disposing) {
+    protected override void Dispose(bool disposing)
+    {
         if (disposing && (components != null)) { components.Dispose(); }
         base.Dispose(disposing);
     }
 
-    public tabGpu() {
+    public tabGpu()
+    {
         InitializeComponent();
         InitializeExtras();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
-    private void InitializeComponent() {
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña GPU
+    private void ApplyLocalization()
+    {
+        // Labels
+        lblGpuChart.Text = "Uso total de la GPU";
+        lblDedicatedMemory.Text = "Uso de memoria dedicada";
+        lblSharedMemory.Text = "Uso de memoria compartida";
+        lblPowerUsage.Text = "Consumo de energía";
+        lblTemperature.Text = "Temperatura";
+
+        // Combobox (placeholders iniciales)
+        if (cboEngine1.Items.Count == 0) cboEngine1.Items.Add("Motor 1");
+        if (cboEngine2.Items.Count == 0) cboEngine2.Items.Add("Motor 2");
+        cboEngine1.Text = "Motor principal";
+        cboEngine2.Text = "Procesamiento de video";
+
+        // También título y descripción de la pestaña
+        Title = "GPU";
+        Description = "Rendimiento de la tarjeta gráfica";
+
+        //lblGpuChart.Font = new Font(lblGpuChart.Font.FontFamily, 10, FontStyle.Bold);
+        lblDedicatedMemory.Font = new Font(lblDedicatedMemory.Font.FontFamily, 9);
+        lblSharedMemory.Font = new Font(lblSharedMemory.Font.FontFamily, 9);
+        lblPowerUsage.Font = new Font(lblPowerUsage.Font.FontFamily, 9);
+        lblTemperature.Font = new Font(lblTemperature.Font.FontFamily, 9);
+    }
+    private void InitializeComponent()
+    {
         components = new Container();
         il = new ImageList(components);
         tlp = new TableLayoutPanel();
@@ -404,9 +439,11 @@ internal class tabGpu : UserControl, ITaskManagerTab {
         tlp.ResumeLayout(false);
         ResumeLayout(false);
     }
-    private void InitializeExtras() {
+    private void InitializeExtras()
+    {
         Charts = new[] { chartDedicatedMemory, chartEngine1, chartEngine2, chartGpu, chartPower, chartSharedMemory, chartTemperature };
-        foreach (sMkPerfChart g in Charts) {
+        foreach (sMkPerfChart g in Charts)
+        {
             g.SetIndexes("Gpu0");
             g.BackColorShade = Color.FromArgb(0, 0, 0);
             g.ScaleMode = sMkPerfChart.ScaleModes.Absolute;
@@ -426,27 +463,35 @@ internal class tabGpu : UserControl, ITaskManagerTab {
         lv.ColumnWidthChanged += OnListViewColumnWidthChanged;
     }
 
-    private void OnListViewColumnReordered(object? sender, ColumnReorderedEventArgs e) {
+    private void OnListViewColumnReordered(object? sender, ColumnReorderedEventArgs e)
+    {
         if (e.Header!.Text == "ID") { e.Cancel = true; }
         if (e.Header!.Text == "Name") { e.Cancel = true; }
         if (e.NewDisplayIndex == 0) { e.Cancel = true; }
     }
-    private void OnListViewSizeChanged(object? sender, EventArgs e) {
-        if (lv.Columns.Count >= 1 && lv.Width > 200) {
+    private void OnListViewSizeChanged(object? sender, EventArgs e)
+    {
+        if (lv.Columns.Count >= 1 && lv.Width > 200)
+        {
             lv.Columns[0].Width = Math.Max(50, lv.Width - lv.TotalColumnsWidth(0));
         }
     }
-    private void OnListViewColumnWidthChanging(object? sender, ColumnWidthChangingEventArgs e) {
-        if (lv.Visible && lv.Columns.Count >= 1 && e.ColumnIndex != 0) {
+    private void OnListViewColumnWidthChanging(object? sender, ColumnWidthChangingEventArgs e)
+    {
+        if (lv.Visible && lv.Columns.Count >= 1 && e.ColumnIndex != 0)
+        {
             lv.Columns[0].Width = Math.Max(50, lv.Width - lv.TotalColumnsWidth(0));
         }
     }
-    private void OnListViewColumnWidthChanged(object? sender, ColumnWidthChangedEventArgs e) {
+    private void OnListViewColumnWidthChanged(object? sender, ColumnWidthChangedEventArgs e)
+    {
         // Dont force this, its crashing unexpectedly
         // if (e.ColumnIndex == 0) { lv.Columns[0].Width = Math.Max(50, lv.Width - lv.TotalColumnsWidth(0)); }
     }
-    private Color PopulateAndGetAdapterColor(short number) {
-        var thisColor = number switch {
+    private Color PopulateAndGetAdapterColor(short number)
+    {
+        var thisColor = number switch
+        {
             1 => Color.CornflowerBlue,
             2 => Color.Khaki,
             3 => Color.LightSteelBlue,
@@ -454,24 +499,30 @@ internal class tabGpu : UserControl, ITaskManagerTab {
             5 => Color.PaleGreen,
             _ => Color.DarkGray,
         };
-        if (!il.Images.ContainsKey(number.ToString())) {
+        if (!il.Images.ContainsKey(number.ToString()))
+        {
             Bitmap bmp = new(16, 16);
             Graphics g = Graphics.FromImage(bmp);
-            using (SolidBrush thisBrush = new(thisColor)) {
+            using (SolidBrush thisBrush = new(thisColor))
+            {
                 g.FillRectangle(thisBrush, 1, 1, 14, 14);
             }
-            using (Pen thisPen = new(Color.Black, 1)) {
+            using (Pen thisPen = new(Color.Black, 1))
+            {
                 g.DrawRectangle(thisPen, 1, 1, 14, 14);
             }
             il.Images.Add(number.ToString(), bmp);
         }
         return thisColor;
     }
-    private void PopulateEngines() {
+    private void PopulateEngines()
+    {
         string default1 = "3D";
         string default2 = "Video Processing";
-        foreach (TaskManagerGPU a in GPUs) {
-            foreach (TaskManagerGPU.NodeInfo n in a.Nodes) {
+        foreach (TaskManagerGPU a in GPUs)
+        {
+            foreach (TaskManagerGPU.NodeInfo n in a.Nodes)
+            {
                 if (!cboEngine1.Items.Contains(n.Name)) cboEngine1.Items.Add(n.Name);
                 if (!cboEngine2.Items.Contains(n.Name)) cboEngine2.Items.Add(n.Name);
             }
@@ -479,8 +530,10 @@ internal class tabGpu : UserControl, ITaskManagerTab {
         if (cboEngine1.Text == "") { cboEngine1.Text = cboEngine1.Items.Contains(default1) ? default1 : ""; }
         if (cboEngine2.Text == "") { cboEngine2.Text = cboEngine2.Items.Contains(default2) ? default2 : ""; }
     }
-    private void PopulateGraphIndexes() {
-        foreach (sMkPerfChart g in Charts) {
+    private void PopulateGraphIndexes()
+    {
+        foreach (sMkPerfChart g in Charts)
+        {
             if (GPUs.Count == 1) { g.SetIndexes("GPU1"); }
             if (GPUs.Count == 2) { g.SetIndexes("GPU1", "GPU2"); }
             if (GPUs.Count == 3) { g.SetIndexes("GPU1", "GPU2", "GPU3"); }
@@ -494,8 +547,10 @@ internal class tabGpu : UserControl, ITaskManagerTab {
             if (GPUs.Count >= 5) g.PenGraph5.Color = GPUs[4].Color;
         }
     }
-    private void PopulateGraphValues() {
-        if (GPUs.Count == 1) {
+    private void PopulateGraphValues()
+    {
+        if (GPUs.Count == 1)
+        {
             chartGpu.AddValue(GPUs[0].UsageValue);
             chartEngine1.AddValue(GPUs[0].EngineUsageValue(cboEngine1.Text));
             chartEngine2.AddValue(GPUs[0].EngineUsageValue(cboEngine2.Text));
@@ -503,7 +558,9 @@ internal class tabGpu : UserControl, ITaskManagerTab {
             chartSharedMemory.AddValue(GPUs[0].SharedMemoryUsage);
             chartTemperature.AddValue(GPUs[0].Temperature);
             chartPower.AddValue(GPUs[0].PowerUsage);
-        } else if (GPUs.Count == 2) {
+        }
+        else if (GPUs.Count == 2)
+        {
             chartGpu.AddValue(GPUs[0].UsageValue, GPUs[1].UsageValue);
             chartEngine1.AddValue(GPUs[0].EngineUsageValue(cboEngine1.Text), GPUs[1].EngineUsageValue(cboEngine1.Text));
             chartEngine2.AddValue(GPUs[0].EngineUsageValue(cboEngine2.Text), GPUs[1].EngineUsageValue(cboEngine2.Text));
@@ -511,19 +568,25 @@ internal class tabGpu : UserControl, ITaskManagerTab {
             chartSharedMemory.AddValue(GPUs[0].SharedMemoryUsage, GPUs[1].SharedMemoryUsage);
             chartPower.AddValue(GPUs[0].PowerUsage, GPUs[1].PowerUsage);
             chartTemperature.AddValue(GPUs[0].Temperature, GPUs[1].Temperature);
-        } else if (GPUs.Count == 3) {
+        }
+        else if (GPUs.Count == 3)
+        {
             chartGpu.AddValue(GPUs[0].UsageValue, GPUs[1].UsageValue, GPUs[2].UsageValue);
             chartDedicatedMemory.AddValue(GPUs[0].DedicatedMemoryUsage, GPUs[1].DedicatedMemoryUsage, GPUs[2].DedicatedMemoryUsage);
             chartSharedMemory.AddValue(GPUs[0].SharedMemoryUsage, GPUs[1].SharedMemoryUsage, GPUs[2].SharedMemoryUsage);
             chartPower.AddValue(GPUs[0].PowerUsage, GPUs[1].PowerUsage, GPUs[2].PowerUsage);
             chartTemperature.AddValue(GPUs[0].Temperature, GPUs[1].Temperature, GPUs[2].Temperature);
-        } else if (GPUs.Count == 4) {
+        }
+        else if (GPUs.Count == 4)
+        {
             chartGpu.AddValue(GPUs[0].UsageValue, GPUs[1].UsageValue, GPUs[2].UsageValue, GPUs[3].UsageValue);
             chartDedicatedMemory.AddValue(GPUs[0].DedicatedMemoryUsage, GPUs[1].DedicatedMemoryUsage, GPUs[2].DedicatedMemoryUsage, GPUs[3].DedicatedMemoryUsage);
             chartSharedMemory.AddValue(GPUs[0].SharedMemoryUsage, GPUs[1].SharedMemoryUsage, GPUs[2].SharedMemoryUsage, GPUs[3].SharedMemoryUsage);
             chartPower.AddValue(GPUs[0].PowerUsage, GPUs[1].PowerUsage, GPUs[2].PowerUsage, GPUs[3].PowerUsage);
             chartTemperature.AddValue(GPUs[0].Temperature, GPUs[1].Temperature, GPUs[2].Temperature, GPUs[3].Temperature);
-        } else if (GPUs.Count >= 5) {
+        }
+        else if (GPUs.Count >= 5)
+        {
             chartGpu.AddValue(GPUs[0].UsageValue, GPUs[1].UsageValue, GPUs[2].UsageValue, GPUs[3].UsageValue, GPUs[4].UsageValue);
             chartDedicatedMemory.AddValue(GPUs[0].DedicatedMemoryUsage, GPUs[1].DedicatedMemoryUsage, GPUs[2].DedicatedMemoryUsage, GPUs[3].DedicatedMemoryUsage, GPUs[4].DedicatedMemoryUsage);
             chartSharedMemory.AddValue(GPUs[0].SharedMemoryUsage, GPUs[1].SharedMemoryUsage, GPUs[2].SharedMemoryUsage, GPUs[3].SharedMemoryUsage, GPUs[4].SharedMemoryUsage);
@@ -532,7 +595,8 @@ internal class tabGpu : UserControl, ITaskManagerTab {
         }
     }
 
-    public void Feature_ForceRefresh() {
+    public void Feature_ForceRefresh()
+    {
         lv.SuspendLayout();
         GPUs.Clear();
         lv.Items.Clear();
@@ -550,26 +614,32 @@ internal class tabGpu : UserControl, ITaskManagerTab {
     public void ForceRefresh() => Feature_ForceRefresh();
     public TaskManagerColumnTypes ColumnType => TaskManagerColumnTypes.GPUs;
     public ListView.ColumnHeaderCollection? GetColumns() => lv.Columns;
-    public void SetColumns(in ListView.ListViewItemCollection colItems) {
+    public void SetColumns(in ListView.ListViewItemCollection colItems)
+    {
         lv.SetColumns(colItems);
         ColsGpus = lv.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToHashSet()!;
     }
 
-    private void RefresherDoWork(bool firstTime = false) {
+    private void RefresherDoWork(bool firstTime = false)
+    {
         RefreshStarts?.Invoke(this, EventArgs.Empty);
         if (GPUs.Count == 0) firstTime = true;
 
-        if (firstTime) {
+        if (firstTime)
+        {
             short i = 0;
-            foreach (TaskManagerGPU a in TaskManagerGPU.GetAdaptersList()) {
+            foreach (TaskManagerGPU a in TaskManagerGPU.GetAdaptersList())
+            {
                 i++;
                 if (i > 5) break;
-                try {
+                try
+                {
                     a.Load();
                     a.Color = PopulateAndGetAdapterColor(i);
                     a.StateImageIndex = il.Images.IndexOfKey(i.ToString());
                     GPUs.Add(a);
-                } catch (Exception ex) { Shared.DebugTrap(ex, 311); }
+                }
+                catch (Exception ex) { Shared.DebugTrap(ex, 311); }
             }
             PopulateGraphIndexes();
             PopulateEngines();
@@ -577,27 +647,37 @@ internal class tabGpu : UserControl, ITaskManagerTab {
             Title = lv.Items.Count > 1 ? "GPUs" : "GPU";
             tlp.RowStyles[tlp.GetRow(lv)].Height = 30 + (lv.Items.Count * 20) + 10;
             if (lv.Columns.Count > 0) lv.Columns[0].Width = Math.Max(50, lv.Width - lv.TotalColumnsWidth(0));
-        } else {
-            foreach (TaskManagerGPU g in GPUs) {
-                try {
+        }
+        else
+        {
+            foreach (TaskManagerGPU g in GPUs)
+            {
+                try
+                {
                     g!.Refresh();
-                } catch (Exception ex) { Shared.DebugTrap(ex, 312); }
+                }
+                catch (Exception ex) { Shared.DebugTrap(ex, 312); }
             }
             PopulateGraphValues();
         }
 
         RefreshComplete?.Invoke(this, EventArgs.Empty);
     }
-    public void Refresher(bool firstTime = false) {
+    public void Refresher(bool firstTime = false)
+    {
         _stopWatch.Restart();
-        if (InvokeRequired) {
+        if (InvokeRequired)
+        {
             Invoke(() => RefresherDoWork(firstTime));
-        } else {
+        }
+        else
+        {
             RefresherDoWork();
         }
         _stopWatch.Stop();
     }
-    public void LoadSettings() {
+    public void LoadSettings()
+    {
         Settings.LoadColsInformation(ColumnType, lv, ref ColsGpus);
         chartGpu.BackSolid = Settings.Performance.Solid;
         chartGpu.AntiAliasing = Settings.Performance.AntiAlias;
@@ -621,6 +701,80 @@ internal class tabGpu : UserControl, ITaskManagerTab {
         chartSharedMemory.CopySettings(chartGpu);
         chartTemperature.CopySettings(chartGpu);
         chartPower.CopySettings(chartGpu);
-    }
 
+
+        // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+        chartGpu.GridSpacing = 110;
+        chartEngine1.GridSpacing = 110;
+        chartEngine2.GridSpacing = 110;
+        chartDedicatedMemory.GridSpacing = 110;
+        chartSharedMemory.GridSpacing = 110;
+        chartTemperature.GridSpacing = 110;
+        chartPower.GridSpacing = 110;
+
+        chartGpu.PenGridHorizontal.Color = Color.Lime;
+        chartGpu.PenGridVertical.Color = Color.Lime;
+
+        chartEngine1.PenGridHorizontal.Color = Color.Orange;
+        chartEngine1.PenGridVertical.Color = Color.Orange;
+
+        chartEngine2.PenGridHorizontal.Color = Color.Cyan;
+        chartEngine2.PenGridVertical.Color = Color.Cyan;
+
+        chartDedicatedMemory.PenGridHorizontal.Color = Color.Magenta;
+        chartDedicatedMemory.PenGridVertical.Color = Color.Magenta;
+
+        chartSharedMemory.PenGridHorizontal.Color = Color.Yellow;
+        chartSharedMemory.PenGridVertical.Color = Color.Yellow;
+
+        chartTemperature.PenGridHorizontal.Color = Color.Red;
+        chartTemperature.PenGridVertical.Color = Color.Red;
+
+        chartPower.PenGridHorizontal.Color = Color.DeepSkyBlue;
+        chartPower.PenGridVertical.Color = Color.DeepSkyBlue;
+
+        chartGpu.BackSolid = false;
+        chartGpu.BackColorShade = Color.FromArgb(0, 40, 0);
+        chartGpu.ShadeBackground = true;
+        chartGpu.PenGridHorizontal.Color = Color.Lime;
+        chartGpu.PenGridVertical.Color = Color.Lime;
+
+        chartEngine1.BackSolid = false;
+        chartEngine1.BackColorShade = Color.FromArgb(40, 20, 0);
+        chartEngine1.ShadeBackground = true;
+        chartEngine1.PenGridHorizontal.Color = Color.Orange;
+        chartEngine1.PenGridVertical.Color = Color.Orange;
+
+        chartEngine2.BackSolid = false;
+        chartEngine2.BackColorShade = Color.FromArgb(0, 20, 40);
+        chartEngine2.ShadeBackground = true;
+        chartEngine2.PenGridHorizontal.Color = Color.Cyan;
+        chartEngine2.PenGridVertical.Color = Color.Cyan;
+
+        chartDedicatedMemory.BackSolid = false;
+        chartDedicatedMemory.BackColorShade = Color.FromArgb(40, 0, 40);
+        chartDedicatedMemory.ShadeBackground = true;
+        chartDedicatedMemory.PenGridHorizontal.Color = Color.Magenta;
+        chartDedicatedMemory.PenGridVertical.Color = Color.Magenta;
+
+        chartSharedMemory.BackSolid = false;
+        chartSharedMemory.BackColorShade = Color.FromArgb(40, 40, 0);
+        chartSharedMemory.ShadeBackground = true;
+        chartSharedMemory.PenGridHorizontal.Color = Color.Yellow;
+        chartSharedMemory.PenGridVertical.Color = Color.Yellow;
+
+        chartTemperature.BackSolid = false;
+        chartTemperature.BackColorShade = Color.FromArgb(40, 0, 0);
+        chartTemperature.ShadeBackground = true;
+        chartTemperature.PenGridHorizontal.Color = Color.Red;
+        chartTemperature.PenGridVertical.Color = Color.Red;
+
+        chartPower.BackSolid = false;
+        chartPower.BackColorShade = Color.FromArgb(0, 20, 40);
+        chartPower.ShadeBackground = true;
+        chartPower.PenGridHorizontal.Color = Color.DeepSkyBlue;
+        chartPower.PenGridVertical.Color = Color.DeepSkyBlue;
+
+    }
 }

@@ -9,7 +9,7 @@ public class sMkPerfChart : UserControl {
     private readonly ContextMenuStrip mnuStyle = new();
     private readonly ContextMenuStrip mnuGrid = new();
     private readonly ColorDialog cd = new();
-
+    
     private const int MAX_VALUE_COUNT = 1024;// Keep only a maximum MAX_VALUE_COUNT amount of values
     private int _GridScrollOffset = 0;       // Offset value for the scrolling grid
     private double _MaxVisibleValue = 0;     // The highest displayed value, required for Relative Scale Mode
@@ -21,6 +21,7 @@ public class sMkPerfChart : UserControl {
     private int _ValueSpacing = 2;
     private readonly StringFormat _LegendStringFormat = new();
     private readonly Font _LegendStringFont = new(DefaultFont.FontFamily, 7);
+    private readonly Font _HoverFont = new(DefaultFont.FontFamily, 7, FontStyle.Bold);
     private readonly Dictionary<short, List<double>> _Values = new();
     private readonly Dictionary<short, double> _LastValue = new();
     private readonly Dictionary<short, double> _AvgValue = new();
@@ -325,6 +326,8 @@ public class sMkPerfChart : UserControl {
         }
 
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
     private void DrawAverageData(Graphics g) {
         if (DetailsOnHover) {
             if (!ClientRectangle.Contains(PointToClient(Cursor.Position))) {
@@ -341,27 +344,39 @@ public class sMkPerfChart : UserControl {
             if (_VisibleValues > 1 && PenAverage.DashStyle != DashStyle.Custom) {
                 g.DrawLine(PenAverage, 2, CalcVerticalPosition(_AvgValue[i]), Width - 3, CalcVerticalPosition(_AvgValue[i]));
             }
+            Font fontToUse = (DetailsOnHover && ClientRectangle.Contains(PointToClient(Cursor.Position)))
+            ? _HoverFont   // si está en hover → negrita
+            : this.Font;
             // Draw Average Values
             if (_VisibleValues > 1 && DisplayAverage) {
                 using Brush sb = new SolidBrush(PenLegend.Color);
-                g.DrawString("Avg: " + Math.Round(_AvgValue[i]) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix), Font, sb, posX, posY);
-                g.DrawString("Max: " + Math.Round(_MaxValue[i]) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix), Font, sb, posX + 115, posY);
+                g.DrawString("Avg: " + Math.Round(_AvgValue[i]) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix),
+                            fontToUse, sb, posX, posY);
+
+                g.DrawString("Max: " + Math.Round(_MaxValue[i]) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix),
+                             fontToUse, sb, posX + 115, posY);
             }
             // Offset by +13 for the next
             posY += 13;
 
         }
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
     private void DrawIndexes(Graphics g) {
         if (DetailsOnHover && !ClientRectangle.Contains(PointToClient(Cursor.Position))) return;
         if (_VisibleValues < 1 || !DisplayIndexes) return;
         // Draw Indexes Values
         var posX = (DisplayLegends ? LegendSpacing + 5 : 4);
         var posY = 2;
+        Font fontToUse = (DetailsOnHover && ClientRectangle.Contains(PointToClient(Cursor.Position)))
+        ? _HoverFont   // si está en hover → negrita
+        : this.Font;   // si no → normal
         for (short i = 1; i <= 5; i++) {
             if (!_Values.ContainsKey(i)) continue;
             using Brush sb = new SolidBrush(_PenGraphs[i].Color);
-            g.DrawString(_Indexes[i] + Math.Round(_LastValue[i], 1) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix), Font, sb, posX, posY);
+            g.DrawString(_Indexes[i] + Math.Round(_LastValue[i], 1) + ((ScaleMode == ScaleModes.Absolute) ? "%" : ValuesSuffix),
+             fontToUse, sb, posX, posY);
             posY += 13;
         }
     }

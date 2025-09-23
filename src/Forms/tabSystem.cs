@@ -53,7 +53,38 @@ internal class tabSystem : UserControl, ITaskManagerTab {
         InitializeHandlers();
         InitializeExtras();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña Sistema
+    private void ApplyLocalization()
+    {
+        // ----- Secciones principales -----
+        lblSystem.Text = "Sistema:";
+        lblRegister.Text = "Registrado a:";
+        lblComputer.Text = "Equipo:";
+        lblSupport.Text = "Información de soporte:";
+
+        // ----- Fabricante -----
+        lblManufacturer.Text = "Fabricado y soportado por:";
+
+        // ----- Mensajes dinámicos -----
+        // Cuando se refresca la información
+        // (mantener inglés interno en SysProps, aquí solo texto mostrado al usuario)
+        Shared.SetStatusText("Propiedades del sistema actualizadas...");
+
+        // Información de soporte en ventana emergente
+        // (se usa en Feature_SupportInformation)
+        // Traducción del título de MessageBox
+        // (puedes cambiar también el texto si prefieres mostrarlo en español completamente)
+        // Ejemplo: "Información de soporte"
+
+        // ----- Título y descripción de la pestaña -----
+        Title = "PC";
+        Description = "Propiedades del sistema";
+    }
+
     private void InitializeComponent() {
         pnlInfo = new Panel();
         lblSupport = new Label();

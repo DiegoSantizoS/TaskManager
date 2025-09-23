@@ -42,7 +42,35 @@ internal class tabUsers : UserControl, ITaskManagerTab {
         InitializeComponent();
         InitializeExtras();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
+
+
+
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña Usuarios
+    private void ApplyLocalization()
+    {
+        // ----- Botones -----
+        btnForceRefresh.Text = "Forzar actualización";
+        btnDisconnect.Text = "Desconectar";
+        btnLogoff.Text = "Cerrar sesión";
+        btnMessage.Text = "Enviar mensaje";
+        btnProperties.Text = "Propiedades";
+
+        // ----- Menú contextual -----
+        cmsMessage.Text = "Enviar mensaje...";
+        cmsConnect.Text = "Conectar";
+        cmsDisconnect.Text = "Desconectar";
+        cmsLogoff.Text = "Cerrar sesión";
+        cmsProperties.Text = "Propiedades";
+
+        // ----- Título y descripción de la pestaña -----
+        Title = "Usuarios";
+        Description = "Sesiones de usuario";
+    }
+
     private void InitializeComponent() {
         components = new Container();
         btnForceRefresh = new Button();

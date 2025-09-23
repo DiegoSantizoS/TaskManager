@@ -39,7 +39,32 @@ internal class tabConnections : UserControl, ITaskManagerTab {
         InitializeComponent();
         InitializeExtras();
         Extensions.CascadingDoubleBuffer(this);
+        ApplyLocalization();
     }
+
+    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+    // Traducción al español de todos los textos de la pestaña Conexiones
+    private void ApplyLocalization()
+    {
+        // Botones
+        btnForceRefresh.Text = "Forzar actualización";
+        btnNaturalSort.Text = "Orden natural";
+        btnIncludeUDP.Text = "Incluir UDP";
+        btnIncludeIPv6.Text = "Incluir IPv6";
+
+        // Label
+        lblTotal.Text = "Conexiones totales:";
+
+        // Menú contextual
+        cmsClose.Text = "Cerrar conexión";
+        cmsKillProcess.Text = "Terminar proceso";
+        cmsGoToProcess.Text = "Ir al proceso";
+
+        // También título y descripción de la pestaña
+        Title = "Conexiones";
+        Description = "Conexiones de red";
+    }
+
     private void InitializeComponent() {
         components = new Container();
         btnForceRefresh = new Button();
