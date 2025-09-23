@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
   <a href="#"><img alt="GitHub Latest Release" src="https://img.shields.io/github/v/release/sMkTools/sMkTaskManager?label=Latest%20Release" /></a>
   <a href="#"><img alt="GitHub License" src="https://img.shields.io/github/license/sMkTools/sMkTaskManager?label=License" /></a>
@@ -97,3 +98,6 @@ I would like to mention that I have a deep admiration for these projects and tru
 + [Process Hacker](https://processhacker.sourceforge.io/) (c) Wen Jia Liu, now known as [System Informer](https://github.com/winsiderss/systeminformer)
 + Original Windows Task Manager (c) [Dave Plummer](https://www.youtube.com/c/DavesGarage)
 + [PCMgr](https://github.com/imengyu/PCMgr) (c) imengyu
+=======
+# TaskManager
+>>>>>>> d7f1f6192c9e9ec8c14c815bc6419fed5859e892
