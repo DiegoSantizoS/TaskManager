@@ -1,4 +1,17 @@
-﻿using System.ComponentModel;
+/* JUAN JESÚS MENDOZA MONTEJO 0901-23-6357
+Este código define la clase frmSystem, que representa una ventana de diálogo 
+modal (FixedDialog) en una aplicación de Windows Forms. El formulario contiene
+un control de pestañas personalizado (tabSystem) que ocupa la mayor parte del área,
+junto con dos botones estándar, "OK" y "Cancel", anclados en la parte inferior. 
+La ventana está configurada para no ser redimensionable y para centrarse sobre su
+ventana padre al abrirse. Su funcionalidad principal se activa en el evento OnLoad,
+donde se llama al método Refresher del control de pestañas, lo que indica que esta 
+ventana actúa como un contenedor para mostrar y actualizar información del sistema 
+contenida en dicho control.
+*/
+
+
+using System.ComponentModel;
 using System.Runtime.Versioning;
 namespace sMkTaskManager.Forms;
 
@@ -83,3 +96,4 @@ public class frmSystem : Form {
         ts.Refresher(true);
     }
 }
+
