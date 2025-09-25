@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
-
+//Miguel David Contreras Jacinto 
+/* es un controla grafico que muestra el uso de recursos a tiempo real de un forma para facital la visualizacion  de los datos*/
 namespace sMkTaskManager.Controls;
 
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
@@ -122,3 +123,4 @@ public class sMkPerfMeter : UserControl {
     }
 
 }
+
