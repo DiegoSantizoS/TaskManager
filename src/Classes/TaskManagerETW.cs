@@ -1,7 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 namespace sMkTaskManager.Classes;
-
+// Miguel David Contreras Jacinto
+/*
+Esta clase se dedica a monitoriar  los recusos de la computadora usan el ETw  que es una infraestructuta de window 
+que permite regitrar eventos del sistema, la cla se utiliza esa infraestructura  para seguir a tiempo real  la activiades 
+del disco y la red en el kernel y usan estucturas nativas con las API de WINDOW 
+*/
 internal static class ETW {
 
     [StructLayout(LayoutKind.Sequential)]
@@ -413,3 +418,4 @@ internal static class ETW {
     }
 
 }
+
