@@ -1,4 +1,18 @@
-﻿using System.Diagnostics;
+/* JUAN JESÚS MENDOZA MONTEJO 0901-23-6357
+Shared es una "caja de herramientas" central para toda la aplicación sMkTaskManager, proporcionando
+una colección de utilidades y funciones de bajo nivel accesibles globalmente. Contiene métodos de 
+extensión para validaciones numéricas, funciones para formatear intervalos de tiempo de manera 
+legible, y utilidades de depuración como DebugTrap para registrar errores sin detener la aplicación.
+Esta clase interactúa directamente con el sistema operativo para obtener información
+del Registro (como el depurador por defecto), identificar la cuenta de sistema y, lo más 
+importante, utiliza llamadas a la API de Windows para elevar los privilegios del proceso 
+(AddPrivilege), lo cual es indispensable para que el administrador de tareas pueda monitorear y gestionar
+otros procesos del sistema. Además, incluye un conjunto de funciones de manipulación de bits para 
+operaciones eficientes y listas para excluir procesos específicos del monitoreo.
+*/
+
+
+using System.Diagnostics;
 using System.Runtime.Versioning;
 using System.Runtime.CompilerServices;
 using System.Globalization;
@@ -162,3 +176,4 @@ internal class CpuUsage {
     public int KernelUsage => _KernelUsage;
 
 }
+
