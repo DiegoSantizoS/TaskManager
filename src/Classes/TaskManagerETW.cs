@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 namespace sMkTaskManager.Classes;
-// Miguel David Contreras Jacinto
+// Miguel David Contreras Jacinto 0901-21-3878
 /*
 Esta clase se dedica a monitoriar  los recusos de la computadora usan el ETw  que es una infraestructuta de window 
 que permite regitrar eventos del sistema, la cla se utiliza esa infraestructura  para seguir a tiempo real  la activiades 
@@ -418,4 +418,5 @@ internal static class ETW {
     }
 
 }
+
 
