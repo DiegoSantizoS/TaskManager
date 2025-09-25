@@ -5,7 +5,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using static sMkTaskManager.Classes.API;
 namespace sMkTaskManager.Classes;
-
+//Miguel David Contreras Jacinto 0901-21-3878
+/**/
 [SupportedOSPlatform("windows")]
 internal class TaskManagerGPU : IDisposable, IEquatable<TaskManagerGPU>, INotifyPropertyChanged {
     private Color _BackColor = Color.Empty;
@@ -377,3 +378,4 @@ internal class TaskManagerGPUCollection : BindingList<TaskManagerGPU> {
         return null;
     }
 }
+
