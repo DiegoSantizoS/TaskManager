@@ -1,4 +1,18 @@
-﻿using System.ComponentModel;
+/* JUAN JESÚS MENDOZA MONTEJO 0901-23-6357
+Este código define la ventana frmProcess_Details, un formulario de Windows Forms
+diseñado para mostrar información en tiempo real sobre un único proceso del sistema.
+El formulario utiliza un temporizador para actualizar periódicamente métricas de 
+rendimiento, como el uso de CPU, memoria (Working Set, Paged, Virtual), E/S de disco
+y actividad de red, mostrando los datos tanto en etiquetas de texto como en gráficos
+que se actualizan en tiempo real. La ventana está organizada en pestañas para mostrar 
+detalles generales, módulos cargados, hilos de ejecución y archivos bloqueados. Su lógica
+se basa en dos objetos principales, Process y TaskManagerProcess, y utiliza el evento 
+PropertyChanged para actualizar la interfaz solo cuando los datos cambian para la monitorización
+detallada de procesos.
+*/
+
+
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
@@ -543,4 +557,5 @@ public partial class frmProcess_Details : Form {
     }
 
 }
+
 
