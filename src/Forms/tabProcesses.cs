@@ -6,6 +6,11 @@ using sMkTaskManager.Controls;
 using System.Runtime.InteropServices;
 namespace sMkTaskManager.Forms;
 
+// Miguel David Contreras Jacinto 0901-21-3878
+/* este form preseta un lista de procesos hay existentes con orden de prioridad o en cualquier orden que esten en las opciones,
+tambien muestra todo los datos del proceso como memoriao, tamaño, nombre y iddel proceso, tabien tiene btones pra modificar 
+cual quier de los procesos que entan ene las lista 
+*/
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 internal class tabProcesses : UserControl, ITaskManagerTab {
     private readonly Stopwatch _stopWatch = new();
@@ -736,5 +741,6 @@ internal class tabProcesses : UserControl, ITaskManagerTab {
         lv.SpaceFirstValue = Settings.IconsInProcess;
         btnAllUsers.Checked = Settings.ShowAllProcess;
     }
+
 
 }
