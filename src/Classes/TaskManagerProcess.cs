@@ -5,7 +5,12 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
-
+//Miguel David Contreras jacinto
+/* esta clase su funcion principlar en encapsular infromacion de cad proceso que pasa por el microprocesador 
+y lo escribe con con detalla en una lista detalla que de lo estan utilizando para funcionar los procesos
+y utilizan etw para obtner los datos a tiempo real , 
+tambien tien funcion de detener, eliminar, detalles, reanunar un proceso en la lista de procesos
+*/
 namespace sMkTaskManager.Classes;
 
 [SupportedOSPlatform("windows")]
@@ -575,3 +580,4 @@ internal class TaskManagerProcessCollection : BindingList<TaskManagerProcess> {
     }
 
 }
+
