@@ -1,4 +1,16 @@
-﻿using Microsoft.Win32;
+/* JUAN JESÙS MENDOZA MONTEJO 0901-23-6357
+
+La clase Settings centraliza la gestión de la configuración de la aplicación. 
+Esto incluye desde opciones de la interfaz de usuario (como colores, tamaños de
+ventana y columnas visibles) hasta configuraciones de comportamiento 
+(como la frecuencia de actualización y las acciones al minimizar o cerrar la aplicación).
+
+La clase está diseñada para ser accesible desde cualquier parte del programa sin necesidad
+de crear una instancia (static), lo que la convierte en un punto único y global para manejar las preferencias.
+*/
+
+
+using Microsoft.Win32;
 using sMkTaskManager.Controls;
 using System.Configuration;
 using System.Runtime.Versioning;
@@ -536,3 +548,4 @@ internal static class Settings {
     }
 
 }
+
