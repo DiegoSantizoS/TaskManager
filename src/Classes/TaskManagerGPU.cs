@@ -6,7 +6,10 @@ using System.Runtime.Versioning;
 using static sMkTaskManager.Classes.API;
 namespace sMkTaskManager.Classes;
 //Miguel David Contreras Jacinto 0901-21-3878
-/**/
+
+/* esta clases de enconga de monitoriar el GPU que est fincionando en la computadora  usando API de window para obneter datos
+del adaptador grafico como nombre y memoria dedicada . tambien  almacenar datos para represnetarlos en una grafica  
+que se autualiza por un periodo determinado*/
 [SupportedOSPlatform("windows")]
 internal class TaskManagerGPU : IDisposable, IEquatable<TaskManagerGPU>, INotifyPropertyChanged {
     private Color _BackColor = Color.Empty;
@@ -378,4 +381,5 @@ internal class TaskManagerGPUCollection : BindingList<TaskManagerGPU> {
         return null;
     }
 }
+
 
