@@ -1,4 +1,18 @@
-﻿using System.ComponentModel;
+/* JUAN JESÚS MENDOZA MONTEJO 0901-23-6357
+es el motor central de recolección de datos del sistema para la aplicación sMkTaskManager,
+encapsulado principalmente en la clase TaskManagerSystem. Esta clase utiliza llamadas a bajo
+nivel de la API de Windows, como NtQuerySystemInformation y GetPerformanceInfo, para obtener
+una instantánea completa y eficiente de las métricas clave del sistema operativo. A través
+de su método Refresh(), actualiza periódicamente datos vitales como el uso de memoria física
+y de paginación, la actividad de E/S de disco, contadores del sistema (procesos, hilos, handles)
+y el uso de CPU, que obtiene de la clase CpuUsage. Toda esta información se estructura en 
+objetos Metric para un manejo organizado y se expone a través de propiedades que calculan y 
+formatean los datos en valores legibles (porcentajes o cadenas con unidades como Kb/Mb), listos
+para ser consumidos y mostrados por la interfaz gráfica del administrador de tareas.
+*/
+
+
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices;
@@ -341,4 +355,5 @@ internal class TaskManagerSystemValuesOld : INotifyPropertyChanged {
     }
 
 }
+
 
