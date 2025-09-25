@@ -2,7 +2,11 @@
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
 namespace sMkTaskManager.Forms;
-
+//Miugel David Contreras Jacinto 0901-21-3878
+/* est porte del codigo implementa un pestañs de informacion del los compomnetes del sorfware y harware de la computadora 
+y hacindo un capia de eso datos para colocarla en un apestaña con una imagen saca del sistama operatico con un boton 
+para actualizar los datos 
+*/
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 internal class tabSystem : UserControl, ITaskManagerTab {
     private readonly TaskManagerSystemProps SysProps = new();
@@ -506,5 +510,6 @@ internal class tabSystem : UserControl, ITaskManagerTab {
         if (lblSystem1.Text == "") firstTime = true;
         if (firstTime) { Invoke(() => RefresherDoWork(firstTime)); }
     }
+
 
 }
