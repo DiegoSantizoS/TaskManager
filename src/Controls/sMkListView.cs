@@ -1,4 +1,17 @@
-﻿using System.Collections;
+/* JUAN JESÚS MENDOZA MONTEJO 0901-23-6357
+El archivo presenta una clase sMkListView altamente personalizada que extiende el ListView
+estándar de WinForms para crear un control de visualización de datos avanzado. Este control
+integra un sofisticado sistema de ordenación por columnas que, mediante llamadas a la API de
+Windows, muestra iconos de dirección (flechas arriba/abajo) en las cabeceras. 
+Además, implementa un robusto mecanismo de enlace de datos (data binding) que actualiza la 
+lista automáticamente cuando la fuente de datos cambia, utilizando reflexión para mapear 
+propiedades de objetos a las columnas correspondientes. Encapsulada en la clase sMkColumnSorter,
+permite ordenar correctamente no solo texto y números, sino también valores complejos como fechas
+y tamaños de datos (KB, MB, GB).
+*/
+
+
+using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
@@ -536,3 +549,4 @@ public class sMkColumnSorter : IComparer {
         return retValue;
     }
 }
+
