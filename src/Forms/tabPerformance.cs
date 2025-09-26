@@ -6,6 +6,20 @@ using sMkTaskManager.Classes;
 using sMkTaskManager.Controls;
 namespace sMkTaskManager.Forms;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase tabPerformance representa la pestaña de rendimiento del Administrador de Tareas. 
+    Muestra gráficas y medidores en tiempo real del uso de CPU, memoria, disco, red y operaciones de E/S.
+
+    Utiliza controles personalizados como sMkPerfMeter y sMkPerfChart para visualizar el historial 
+    y valores actuales de uso del sistema. Además, organiza información técnica detallada sobre memoria, 
+    kernel, pagefile y otros componentes del sistema.
+
+    Soporta modo de pantalla completa, actualización automática, localización en español 
+    y personalización visual mediante configuraciones de usuario.
+*/
+
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 internal partial class tabPerformance : UserControl, ITaskManagerTab {
     private readonly Stopwatch _stopWatch = new();
@@ -1570,4 +1584,5 @@ internal partial class tabPerformance : UserControl, ITaskManagerTab {
     }
 
 }
+
 
