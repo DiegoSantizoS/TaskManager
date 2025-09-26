@@ -1,4 +1,16 @@
-﻿using System.ComponentModel;
+// Pedro José Gómez Villalobos 0901-23-4868
+/*Este formulario de Windows Forms está diseñado para permitir al usuario 
+configurar la afinidad de un proceso en el sistema, es decir, seleccionar 
+en qué núcleos del procesador se puede ejecutar. Para lograrlo, el formulario 
+crea dinámicamente un conjunto de checkboxes que representan cada CPU disponible,
+junto con una opción para seleccionar o deseleccionar todos a la vez. La elección
+del usuario se guarda en una máscara de bits en otras palabras el BitMask, que 
+indica qué núcleos está habilitados, y solo se confirma si al menos un CPU fue
+marcado. En pocas palabras,es una interfaz gráfica que facilita asignar procesos 
+a determinados procesadores de la computadora.
+*/
+
+using System.ComponentModel;
 using System.Runtime.Versioning;
 
 namespace sMkTaskManager.Forms;
@@ -70,3 +82,4 @@ public partial class frmProcess_Affinity : Form {
     }
 
 }
+
