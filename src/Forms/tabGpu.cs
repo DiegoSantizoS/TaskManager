@@ -8,6 +8,25 @@ using sMkTaskManager.Classes;
 using sMkTaskManager.Controls;
 namespace sMkTaskManager.Forms;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase tabGpu representa la pestaña del Administrador de Tareas que muestra 
+    información de rendimiento del GPU.
+
+    Este control permite visualizar, mediante gráficas personalizadas, el uso total 
+    de GPU, consumo de memoria dedicada y compartida, temperatura, energía y 
+    desempeño de motores gráficos específicos (como 3D o procesamiento de video).
+
+    Utiliza controles sMkPerfChart para representar datos en tiempo real y una 
+    lista tipo sMkListView para mostrar adaptadores detectados. Se adapta 
+    automáticamente a sistemas con múltiples GPUs y permite personalización visual 
+    mediante configuraciones.
+
+    Incluye traducción al español de etiquetas y soporta actualizaciones periódicas
+    para representar métricas actualizadas del sistema gráfico.
+*/
+
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 internal class tabGpu : UserControl, ITaskManagerTab
 {
@@ -778,3 +797,4 @@ internal class tabGpu : UserControl, ITaskManagerTab
 
     }
 }
+
