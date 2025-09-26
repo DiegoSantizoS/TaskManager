@@ -1,4 +1,19 @@
-﻿using System.ComponentModel;
+//Pedro José Gómez Villalobos    0901-23-4868
+/*
+Este formulario se encarga de mostrar información detallada 
+sobre un usuario de sesión en el sistema, utilizando un objeto 
+de la clase TaskManagerUser. A través de la propiedad ID, se 
+inicializa el usuario con su identificador, se actualizan sus 
+datos y se cargan en la interfaz mediante el método LoadSessionDetails().
+En esa carga se muestran múltiples detalles: nombre de usuario,
+estado de la sesión, cliente remoto, dirección, resolución de 
+pantalla, tiempos de conexión, inicio de sesión, desconexión y 
+última interacción, calculando además cuánto tiempo ha pasado 
+desde cada evento. El formulario también incluye un botón para 
+refrescar la información y otro para cerrarlo.
+*/
+
+using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
@@ -61,3 +76,4 @@ public partial class frmUser_Details : Form {
     }
 
 }
+
