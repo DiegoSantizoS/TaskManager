@@ -1,4 +1,15 @@
-﻿using System.Diagnostics;
+//Pedro José Gómez Villalobos    0901-23-4868
+/*
+Su función principal es mostrar en un ListView todas las ventanas activas 
+del sistema, con datos como el identificador de proceso (PID), nombre de 
+la tarea, identificador de ventana (handle) y estado. Además, ofrece distintas
+herramientas para interactuar con ellas: cambiar de tarea, minimizar, maximizar,
+organizar en cascada o mosaico, y también finalizar procesos de manera normal
+o forzada. Incluye soporte para menús contextuales, botones de acción y 
+un sistema de refresco automático que mantiene la lista de aplicaciones actualizada en tiempo real.
+*/
+
+using System.Diagnostics;
 using System.ComponentModel;
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
@@ -50,8 +61,7 @@ internal class tabApplications : UserControl, ITaskManagerTab {
         ApplyLocalization();
     }
 
-    // DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
-    // Método para traducir todos los textos de controles al español
+    
     private void ApplyLocalization()
     {
         // Columnas
@@ -649,5 +659,6 @@ internal class tabApplications : UserControl, ITaskManagerTab {
             API.SetForegroundWindow(hwnd);
         }
     }
+
 
 }
