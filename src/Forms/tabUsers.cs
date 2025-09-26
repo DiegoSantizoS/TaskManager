@@ -1,4 +1,15 @@
-﻿using System.ComponentModel;
+//Pedro José Gómez Villalobos    0901-23-4868
+/*
+Este código define la pestaña de usuarios de un administrador de tareas. 
+Su función es mostrar y gestionar todas las sesiones de usuario activas 
+en el sistema mediante un ListView (sMkListView) con soporte de menús 
+contextuales y botones de acción. Desde esta pestaña se pueden realizar 
+operaciones como forzar actualización, conectar, desconectar, cerrar 
+sesión, enviar mensajes a usuarios y ver detalles de sus propiedades. 
+Además, incluye un sistema de refresco que sincroniza la lista en tiempo 
+real, marcando usuarios nuevos o desconectados con colores configurables.
+*/
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 using sMkTaskManager.Classes;
@@ -520,3 +531,4 @@ internal class tabUsers : UserControl, ITaskManagerTab {
     }
 
 }
+
