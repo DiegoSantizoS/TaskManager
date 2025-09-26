@@ -4,6 +4,19 @@ using System.Drawing.Drawing2D;
 using System.Runtime.Versioning;
 namespace sMkTaskManager.Controls;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase sMkPerfChart es un control personalizado para Windows Forms que muestra gráficas de rendimiento 
+    en tiempo real, como uso de CPU, memoria u otros datos numéricos. Permite visualizar hasta cinco líneas 
+    simultáneas, con soporte para leyendas, promedios, estilos de fondo, cuadrículas, y escalas ajustables 
+    (absoluta, relativa o estricta). 
+
+    También incluye menús contextuales para personalizar la apariencia del gráfico y métodos para 
+    actualizar, limpiar y copiar configuraciones. Es ideal para monitorear visualmente métricas 
+    de sistemas o procesos.
+*/
+
 [DesignerCategory("Component"), SupportedOSPlatform("windows")]
 public class sMkPerfChart : UserControl {
     private readonly ContextMenuStrip mnuStyle = new();
@@ -497,3 +510,4 @@ public class sMkPerfChart : UserControl {
     }
 
 }
+
