@@ -2,6 +2,18 @@
 
 namespace sMkTaskManager.Classes;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase TaskManagerColumn representa una columna configurable. Define atributos como el nombre visible, el identificador, el ancho, la alineación,
+    si la columna es fija o predeterminada, y su orden de aparición.
+
+    Esta clase permite crear columnas de distintas formas: desde parámetros directos, desde un texto serializado,
+    o desde un objeto gráfico de tipo ColumnHeader. También proporciona métodos para obtener columnas
+    predeterminadas según el tipo de información que se desea mostrar, como los procesos, servicios, conexiones,
+    puertos, usuarios, adaptadores de red o tarjetas gráficas.
+*/
+
 internal class TaskManagerColumn {
     internal string Label;
     internal string Title;
@@ -242,3 +254,4 @@ public enum TaskManagerColumnTypes : int {
     Nics = 7,
     GPUs = 8,
 }
+
