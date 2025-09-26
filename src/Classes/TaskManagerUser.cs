@@ -7,6 +7,16 @@ using System.Diagnostics;
 
 namespace sMkTaskManager.Classes;
 
+// DIEGO FERNANDO SANTIZO SAMAYOA 0901-22-15950
+
+/*
+    La clase TaskManagerUser representa a un usuario con sesión en el sistema. 
+    Permite obtener información detallada de cada sesión (usuario, estado, tiempos, IP, procesos activos) 
+    y realizar acciones administrativas como desconectar, cerrar sesión o reconectar. 
+    Utiliza la API de Windows para consultar estos datos y se integra con interfaces gráficas 
+    mediante notificaciones de cambio.
+*/
+
 [SupportedOSPlatform("windows")]
 internal class TaskManagerUser : IEquatable<TaskManagerUser>, INotifyPropertyChanged {
 
@@ -361,5 +371,6 @@ internal class TaskManagerUserCollection : BindingList<TaskManagerUser> {
         }
         return null!;
     }
+
 
 }
