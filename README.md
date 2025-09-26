@@ -2,27 +2,27 @@
 
 DIEGO:
 
-  Classes → APIs.cs
-  
-  Classes → APIsD3Dkmt.cs
-  
-  Classes → APIsHandles.cs
-  
-  Classes → Metric.cs
-  
-  Classes → TaskManagerBase.cs
-  
-  Classes → TaskManagerColumns.cs
-  
-  Classes → TaskManagerUser.cs
-  
-  Controls → sMkPerfChart.cs
-  
-  Forms → frmMain.cs
-  
-  Forms → tabGpu.cs
-  
-  Forms → tabPerformance.cs
+	  Classes → APIs.cs
+	  
+	  Classes → APIsD3Dkmt.cs
+	  
+	  Classes → APIsHandles.cs
+	  
+	  Classes → Metric.cs
+	  
+	  Classes → TaskManagerBase.cs
+	  
+	  Classes → TaskManagerColumns.cs
+	  
+	  Classes → TaskManagerUser.cs
+	  
+	  Controls → sMkPerfChart.cs
+	  
+	  Forms → frmMain.cs
+	  
+	  Forms → tabGpu.cs
+	  
+	  Forms → tabPerformance.cs
 
 JUAN:
 
