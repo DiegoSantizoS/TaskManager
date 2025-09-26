@@ -1,4 +1,16 @@
-﻿using System.ComponentModel;
+//Pedro José Gómez Villalobos    0901-23-4868
+/*
+Este código implementa la pestaña de dispositivos. La clase tabDevices,permite listar,
+visualizar y administrar los dispositivos instalados en el sistema a través de un control
+TreeView con íconos personalizados y menús contextuales. Desde esta interfaz el usuario
+puede refrescar la lista de hardware, habilitar o deshabilitar dispositivos, desinstalarlos,
+abrir sus claves de registro en regedit, ir a los servicios relacionados y ver sus propiedades.
+También soporta mostrar dispositivos ocultos o desconectados, diferenciándolos con estilos
+visuales. Además, integra llamadas a la API de Windows para manipular el estado de los 
+dispositivos en tiempo real y obtener rutas de registro.
+*/
+
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -536,3 +548,4 @@ internal class tabDevices : UserControl, ITaskManagerTab {
     }
 
 }
+
