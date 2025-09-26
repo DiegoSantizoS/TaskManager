@@ -1,4 +1,14 @@
-﻿using System.ComponentModel;
+//Pedro José Gómez Villalobos  0901-23-4868
+/*
+Este formulario está pensado para mostrar los archivos que
+un proceso tiene abiertos, utilizando la clase Process de .NET. 
+A través de la propiedad PID, se puede asignar el identificador 
+de un proceso, y el formulario queda preparado para cargar la 
+información relacionada mediante el método LoadProcessFiles(). 
+Además, cuenta con atajos para cerrarse fácilmente, ya sea con 
+la tecla Escape o con un botón.
+*/
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
 namespace sMkTaskManager.Forms;
@@ -29,3 +39,4 @@ public partial class frmProcess_Files : Form {
     }
     private void LoadProcessFiles() { }
 }
+
